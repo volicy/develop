@@ -111,7 +111,7 @@
      <bean id="primaryAuthenticationHandler" class="com.boke.cas.handler.QueryDatabaseAuthtication"
           p:dataSource-ref="dataSource"
           p:passwordEncoder-ref="MD5PasswordEncoder"
-          p:sql="select loginPass from AdminUserInfo where loginName=?" />
+          p:sql="select password from users where email=?" />
           
     <bean id="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${db.driverClassName}" />
