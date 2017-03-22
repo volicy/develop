@@ -21,10 +21,21 @@ dependencies {
 	providedCompile("org.springframework:spring-core:${springVersion}")
 	providedCompile("org.springframework:spring-oxm:${springVersion}")
 	providedCompile('org.springframework.data:spring-data-jpa:1.8.0.RELEASE')
+	providedCompile("org.springframework:spring-aspects:${springVersion}")
+	providedCompile("org.springframework:spring-orm:${springVersion}")
+	providedCompile("org.springframework:spring-aop:${springVersion}")
+	
+	providedCompile("org.springframework.security:spring-security-taglibs:${springVersion}")
+	providedCompile("org.springframework.security:spring-security-config:${springVersion}")
+	providedCompile("org.springframework.security:spring-security-cas:${springVersion}")
+	providedCompile("org.springframework.security:spring-security-core:${springVersion}")
+	
 	providedCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
 	
 	//数据库连接池
 	compile('com.zaxxer:HikariCP:2.6.1')
+	compile("cglib:cglib-nodep:2.2.2")
+	compile("org.aspectj:aspectjweaver:1.6.9")
 	
 	//dubbo
 	compile('org.apache.zookeeper:zookeeper:3.4.6')
