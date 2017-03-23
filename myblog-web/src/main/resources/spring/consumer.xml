@@ -8,17 +8,17 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="dubbo-client"  />
+   <!--  <dubbo:application name="dubbo-client"  /> -->
 
-    <dubbo:monitor protocol="registry"></dubbo:monitor>
+    <!-- <dubbo:monitor protocol="registry"></dubbo:monitor> -->
 
     <!-- <dubbo:registry address="zookeeper://101.200.129.112:2181" id="zk"/> -->
     
     <!-- 本机 伪集群 测试 -->     
-    <!--  <dubbo:registry  protocol="zookeeper"  
-    				address="192.168.31.29:2181,192.168.31.29:2182,192.168.31.29:2183"  /> -->
+     <dubbo:registry  protocol="zookeeper"  
+    				address="192.168.31.29:2181,192.168.31.29:2182,192.168.31.29:2183"  />
     <!-- <dubbo:registry address="multicast://224.5.6.7:1234" id="mt"/> --> <!--multicast-->
-	<dubbo:registry address="N/A" /> 
+	<!-- <dubbo:registry address="N/A" />  -->
     
     <dubbo:protocol name="dubbo"  host="192.168.31.16"  port="20881"/>
 
