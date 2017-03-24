@@ -6,7 +6,9 @@
 
 
 	<import resource="applicationContext-datasource-hikariCP.xml" />
-	<import resource="consumer.xml" />
+	<!-- <import resource="consumer.xml" /> -->
+	<import resource="applicationContext-security.xml" />
+	
 
 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" p:order="1">
 	</bean>
