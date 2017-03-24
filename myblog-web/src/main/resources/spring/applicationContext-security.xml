@@ -25,7 +25,7 @@
         <s:intercept-url pattern="/sec/**" access="permitAll" />  
         <s:intercept-url pattern="/static/**" access="permitAll" />
         <s:intercept-url pattern="/pkgFile/*" access="hasRole('ROLE_USER')" />
-        <s:intercept-url pattern="/test/**" access="hasRole('ROLE_USER')" />
+        <!-- <s:intercept-url pattern="/test/**" access="hasRole('ROLE_USER')" /> -->
          <s:intercept-url pattern="/index/**" access="hasRole('ROLE_USER')" />
         <s:access-denied-handler ref="accessDeniedHandler"/>
         <s:custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
