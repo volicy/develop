@@ -71,17 +71,17 @@
 	<!-- 实现登录中的异常处理 -->
 	<bean id="authFailHandler" class="com.blog.web.handler.AuthFailHandler">
 		<property name="loginUrl"
-			value="${sso_baseurl}/login?service=${mam.htmlBaseUrl}" />
+			value="${sso_baseurl}/login?service=${htmlBaseUrl}" />
 	</bean>
 	
 	<!-- 自定义的登录成功处理方法，如果不是被拦截的页面，则调整到ajax登录返回 -->
 	<bean id="successHandler" class="com.blog.web.handler.AuthenticationSuccessHandler">
-		<property name="ajaxTargetUrl" value="${mam.htmlBaseUrl}" />
+		<property name="ajaxTargetUrl" value="${htmlBaseUrl}" />
 	</bean>
   	
   	<!-- 本地登出成功后，调用此方法从CAS登出 -->
   	<bean id="casLogoutHandler" class="com.blog.web.handler.CasLogoutHandler">
-        <property name="casLogoutUrl" value="${sso_baseurl}/logout?service=${mam.htmlBaseUrl}"/>
+        <property name="casLogoutUrl" value="${sso_baseurl}/logout?service=${htmlBaseUrl}"/>
   	</bean>
   	
 	<bean id="casFilter"
