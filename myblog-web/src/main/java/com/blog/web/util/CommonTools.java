@@ -22,7 +22,7 @@ public class CommonTools {
 
 	private static Log Logger = LogFactory.getLog(CommonTools.class);
 
-	private static byte[] lock = new byte[0]; // ç‰¹åˆ«çš„instanceå˜é‡
+	private static byte[] lock = new byte[0]; // ÌØ±ğµÄinstance±äÁ¿
 
 	private static int generateCount = 0;
 
@@ -40,7 +40,7 @@ public class CommonTools {
 	}  
 	  
 	/**  
-	 * è·å–ä¸€ä¸ªå”¯ä¸€çš„æ•°å­—id, æ ¹æ®å½“å‰æ—¶é—´çš„æ¯«ç§’æ•°+2ä½éšæœºæ•°è·å–
+	 * »ñÈ¡Ò»¸öÎ¨Ò»µÄÊı×Öid, ¸ù¾İµ±Ç°Ê±¼äµÄºÁÃëÊı+2Î»Ëæ»úÊı»ñÈ¡
 	 *
 	 * @return 
 	 */
@@ -58,7 +58,7 @@ public class CommonTools {
 	}
 
 	/**
-	 * è·å–uuid
+	 * »ñÈ¡uuid
 	 * 
 	 * Author: chenggang.du
 	 * $Date: 2014-12-22 09:19:51 +0800 (Mon, 22 Dec 2014) $
@@ -67,7 +67,7 @@ public class CommonTools {
 		return UUID.randomUUID().toString();
 	}
 	
-	// åˆ é™¤ç£ç›˜ä¸Šçš„è½¯ä»¶åŒ…æ–‡ä»¶
+	// É¾³ı´ÅÅÌÉÏµÄÈí¼ş°üÎÄ¼ş
 	public static void deleteFile(String fileUrl) {
 		final File file = new File(fileUrl);
 		if (file.exists()) {
@@ -83,7 +83,7 @@ public class CommonTools {
 	
 	/**
 	 * 
-	 * æ‹·è´æ–‡ä»¶ Author: chenggang.du $Date: 2011-07-01 15:44:36 +0800 (å‘¨äº”, 01 ä¸ƒæœˆ
+	 * ¿½±´ÎÄ¼ş Author: chenggang.du $Date: 2011-07-01 15:44:36 +0800 (ÖÜÎå, 01 ÆßÔÂ
 	 * 2011) $
 	 */
 	public static long copyFile(String srcFile, String targetPath,
@@ -104,13 +104,13 @@ public class CommonTools {
 					Logger.error("mkdir failed:" + targetPath);
 				}
 			}
-			if (oldfile.exists()) { // æ–‡ä»¶å­˜åœ¨æ—¶
-				inStream = new FileInputStream(srcFile); // è¯»å…¥åŸæ–‡ä»¶
+			if (oldfile.exists()) { // ÎÄ¼ş´æÔÚÊ±
+				inStream = new FileInputStream(srcFile); // ¶ÁÈëÔ­ÎÄ¼ş
 				outStream = new FileOutputStream(targetPath + targetFileName);
 				final byte[] buffer = new byte[1444];
 				byteread = inStream.read(buffer);
 				while (byteread != -1) {
-					bytesum += byteread; // å­—èŠ‚æ•° æ–‡ä»¶å¤§å°
+					bytesum += byteread; // ×Ö½ÚÊı ÎÄ¼ş´óĞ¡
 					outStream.write(buffer, 0, byteread);
 					byteread = inStream.read(buffer);
 				}
@@ -120,7 +120,7 @@ public class CommonTools {
 				Logger.error("src file " + srcFile + " not exists!");
 			}
 		} catch (Exception e) {
-			Logger.error("å¤åˆ¶å•ä¸ªæ–‡ä»¶æ“ä½œå‡ºé”™", e);
+			Logger.error("¸´ÖÆµ¥¸öÎÄ¼ş²Ù×÷³ö´í", e);
 		} finally {
 			CommonTools.closeIgnoringException(inStream);
 			CommonTools.closeIgnoringException(outStream);
@@ -129,7 +129,7 @@ public class CommonTools {
 	}
 
 	/**
-	 * è¿”å›å½“å¤©çš„å­—ç¬¦ä¸²è¡¨ç¤º
+	 * ·µ»Øµ±ÌìµÄ×Ö·û´®±íÊ¾
 	 * 
 	 * Author: chenggang.du
 	 * $Date: 2014-12-22 09:19:51 +0800 (Mon, 22 Dec 2014) $
@@ -143,7 +143,7 @@ public class CommonTools {
 	}
 
 	/**  
-	 * è¿”å›å¹´æœˆæ—¥åˆ†å‰²çš„æ–‡ä»¶å¤¾è·¯å¾‘
+	 * ·µ»ØÄêÔÂÈÕ·Ö¸îµÄÎÄ¼şŠAÂ·½
 	 *
 	 * @return 
 	 */
@@ -159,7 +159,7 @@ public class CommonTools {
 	}
 	
 	/**
-	 * å…¬ç”¨çš„å…³é—­æµçš„ä»£ç 
+	 * ¹«ÓÃµÄ¹Ø±ÕÁ÷µÄ´úÂë
 	 * 
 	 * Author: chenggang.du
 	 * $Date: 2014-12-22 09:19:51 +0800 (Mon, 22 Dec 2014) $
@@ -175,7 +175,7 @@ public class CommonTools {
 	}
 	
     /**  
-     * è·å–è¯·æ±‚çš„æ¥æºip
+     * »ñÈ¡ÇëÇóµÄÀ´Ô´ip
      *
      * @param request
      * @return 
@@ -202,7 +202,7 @@ public class CommonTools {
     }
     
     /**  
-     * æ ¹æ®ç»™å®šçš„ipåˆ—è¡¨éªŒè¯ç»™å®šipæ˜¯å¦åˆæ³•
+     * ¸ù¾İ¸ø¶¨µÄipÁĞ±íÑéÖ¤¸ø¶¨ipÊÇ·ñºÏ·¨
      *
      * @param srcIp
      * @param valideIps
@@ -231,7 +231,7 @@ public class CommonTools {
     }  
       
     /**  
-     * åå…­è¿›åˆ¶å­—ç¬¦ä¸²è½¬æ¢æˆbytes 
+     * Ê®Áù½øÖÆ×Ö·û´®×ª»»³Ébytes 
      *
      * @param hexStr
      * @return 
@@ -249,7 +249,7 @@ public class CommonTools {
     }      
 
     /**  
-     * bytesè½¬æ¢æˆåå…­è¿›åˆ¶å­—ç¬¦ä¸² 
+     * bytes×ª»»³ÉÊ®Áù½øÖÆ×Ö·û´® 
      *
      * @param b
      * @return 
@@ -270,7 +270,7 @@ public class CommonTools {
 
 
     /**
-     * è·å–é‚®ä»¶æœåŠ¡å™¨çš„è®¿é—®åœ°å€
+     * »ñÈ¡ÓÊ¼ş·şÎñÆ÷µÄ·ÃÎÊµØÖ·
      * 
      * @param email
      * @return
@@ -310,8 +310,8 @@ public class CommonTools {
     }
 
     /**  
-     * å°†appIdæˆªå–å‰8ä½ï¼Œè¡¥é›¶ï¼Œè·å–å8ä½å­—ç¬¦ä¸²
-     * å¦‚ appId: 11112 è¿”å› 00011112
+     * ½«appId½ØÈ¡Ç°8Î»£¬²¹Áã£¬»ñÈ¡ºó8Î»×Ö·û´®
+     * Èç appId: 11112 ·µ»Ø 00011112
      * 
      * @param appId
      * @return 
