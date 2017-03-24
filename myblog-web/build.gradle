@@ -73,10 +73,10 @@ task copyServerConfig(type: Copy) {
 task 生产环境(type: War){
 	dependsOn copyServerConfig
 	archiveName 'ROOT.war'
-	rootSpec.exclude('spring/applicationContext-content.xml')
+	rootSpec.exclude('spring/applicationContext-prod.xml')
 }
 task 开发测试(type: War){
 	dependsOn copyTestingConfig
 	archiveName 'ROOT.war'
-	rootSpec.exclude('spring/applicationContext-content.xml')
+	rootSpec.exclude('spring/applicationContext-prod.xml')
 }
