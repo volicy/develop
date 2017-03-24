@@ -5,11 +5,11 @@ import java.util.List;
 
 public class URLBean {
 	
-	private int visitLimit = 600;//æ¯3åˆ†é’Ÿè®¿é—®æ¬¡æ•°ä¸Šé™
+	private int visitLimit = 600;//Ã¿3·ÖÖÓ·ÃÎÊ´ÎÊıÉÏÏŞ
 	
-	private String unRestrictIp ;//ä¸é™åˆ¶è®¿é—®çš„ipåœ°å€å‰ç¼€
+	private String unRestrictIp ;//²»ÏŞÖÆ·ÃÎÊµÄipµØÖ·Ç°×º
 	
-	private List<String> countFilterURL = new ArrayList<String>();//éœ€è¦é™åˆ¶è®¿é—®çš„æ¥å£
+	private List<String> countFilterURL = new ArrayList<String>();//ĞèÒªÏŞÖÆ·ÃÎÊµÄ½Ó¿Ú
 
 	 public List<String> getCountFilterURL() {
 	  return countFilterURL;

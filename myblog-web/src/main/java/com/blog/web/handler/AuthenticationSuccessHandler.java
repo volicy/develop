@@ -47,7 +47,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
             return;
         }
         
-        //不是被拦截的页面, 则转到ajax登录返回页面
+        ////不是被拦截的页面, 则转到ajax登录返回页面
         if (ajaxTargetUrl != null) {
             clearAuthenticationAttributes(request);
             getRedirectStrategy().sendRedirect(request, response, ajaxTargetUrl);

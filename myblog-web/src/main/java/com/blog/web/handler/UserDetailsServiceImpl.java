@@ -33,7 +33,7 @@ import org.zywx.appdo.mdm.entity.application.MdmAplctiongrp;*/
 
 
 /**
- * 此类描述的是：用户登录spring-security的接口 $Author: chenggang.du $ $Revision: 6201 $
+ * 此类描述的是：用户登录spring-security的接口
  */
 
 public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsService {
@@ -150,9 +150,9 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
     		
         }
         List<String> list=new ArrayList<String>();
-		list.add("默认组");
-		list.add("白名单组");
-		list.add("黑名单组");
+		list.add("Ĭ����");
+		list.add("��������");
+		list.add("��������");
 		for(String s:list){
 			MdmAplctiongrp mdm=appService.findByLoginNameAndName(user.getLoginName(),s);
 			if(mdm==null){
