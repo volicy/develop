@@ -15,7 +15,7 @@ public class AuthenticationEntryPoint extends CasAuthenticationEntryPoint {
 	private String noLoginPage = null;
 
 	/**
-	 * Èç¹ûÊÇÀ¹½Ø/login/loginStatus.*,Ôò×·¼Ó&noLoginPage=trueÒÔÍ¨Öªsso²»Éú³ÉµÇÂ¼Ò³Ãæ
+	 * å¦‚æœæ˜¯æ‹¦æˆª/login/loginStatus.*,åˆ™è¿½åŠ &noLoginPage=trueä»¥é€šçŸ¥ssoä¸ç”Ÿæˆç™»å½•é¡µé¢
 	 */
 	protected String createServiceUrl(final HttpServletRequest request, final HttpServletResponse response) {
 		String serviceUrl = super.createServiceUrl(request, response);

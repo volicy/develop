@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * 
- * 自定义的登录成功处理方法，如果不是被拦截的页面，则调整到ajax登录返回
+ * 鑷畾涔夌殑鐧诲綍鎴愬姛澶勭悊鏂规硶锛屽鏋滀笉鏄鎷︽埅鐨勯〉闈紝鍒欒皟鏁村埌ajax鐧诲綍杩斿洖
  * 
  */
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -47,7 +47,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
             return;
         }
         
-        //不是被拦截的页面, 则转到ajax登录返回页面
+        ////涓嶆槸琚嫤鎴殑椤甸潰, 鍒欒浆鍒癮jax鐧诲綍杩斿洖椤甸潰
         if (ajaxTargetUrl != null) {
             clearAuthenticationAttributes(request);
             getRedirectStrategy().sendRedirect(request, response, ajaxTargetUrl);

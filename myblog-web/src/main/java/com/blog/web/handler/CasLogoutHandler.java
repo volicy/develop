@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
- * 本地登出成功后，调用此方法从CAS登出
+ * 鏈湴鐧诲嚭鎴愬姛鍚庯紝璋冪敤姝ゆ柟娉曚粠CAS鐧诲嚭
  */
 public class CasLogoutHandler implements LogoutSuccessHandler {
 

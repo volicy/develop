@@ -22,7 +22,7 @@ public class CommonTools {
 
 	private static Log Logger = LogFactory.getLog(CommonTools.class);
 
-	private static byte[] lock = new byte[0]; // ÌØ±ðµÄinstance±äÁ¿
+	private static byte[] lock = new byte[0]; // ç‰¹åˆ«çš„instanceå˜é‡
 
 	private static int generateCount = 0;
 
@@ -40,7 +40,7 @@ public class CommonTools {
 	}  
 	  
 	/**  
-	 * »ñÈ¡Ò»¸öÎ¨Ò»µÄÊý×Öid, ¸ù¾Ýµ±Ç°Ê±¼äµÄºÁÃëÊý+2Î»Ëæ»úÊý»ñÈ¡
+	 * èŽ·å–ä¸€ä¸ªå”¯ä¸€çš„æ•°å­—id, æ ¹æ®å½“å‰æ—¶é—´çš„æ¯«ç§’æ•°+2ä½éšæœºæ•°èŽ·å–
 	 *
 	 * @return 
 	 */
@@ -58,16 +58,15 @@ public class CommonTools {
 	}
 
 	/**
-	 * »ñÈ¡uuid
-	 * 
-	 * Author: chenggang.du
-	 * $Date: 2014-12-22 09:19:51 +0800 (Mon, 22 Dec 2014) $
+	 * èŽ·å–uuid
 	 */
 	public static String getUuidString() {
 		return UUID.randomUUID().toString();
 	}
 	
-	// É¾³ý´ÅÅÌÉÏµÄÈí¼þ°üÎÄ¼þ
+	/**
+	 * åˆ é™¤ç£ç›˜ä¸Šçš„è½¯ä»¶åŒ…æ–‡ä»¶
+	 */
 	public static void deleteFile(String fileUrl) {
 		final File file = new File(fileUrl);
 		if (file.exists()) {
@@ -82,9 +81,7 @@ public class CommonTools {
 	}
 	
 	/**
-	 * 
-	 * ¿½±´ÎÄ¼þ Author: chenggang.du $Date: 2011-07-01 15:44:36 +0800 (ÖÜÎå, 01 ÆßÔÂ
-	 * 2011) $
+	 * æ‹·è´æ–‡ä»¶
 	 */
 	public static long copyFile(String srcFile, String targetPath,
 			String targetFileName) {
@@ -104,13 +101,13 @@ public class CommonTools {
 					Logger.error("mkdir failed:" + targetPath);
 				}
 			}
-			if (oldfile.exists()) { // ÎÄ¼þ´æÔÚÊ±
-				inStream = new FileInputStream(srcFile); // ¶ÁÈëÔ­ÎÄ¼þ
+			if (oldfile.exists()) { //// æ–‡ä»¶å­˜åœ¨æ—¶
+				inStream = new FileInputStream(srcFile); //è¯»å…¥åŽŸæ–‡ä»¶
 				outStream = new FileOutputStream(targetPath + targetFileName);
 				final byte[] buffer = new byte[1444];
 				byteread = inStream.read(buffer);
 				while (byteread != -1) {
-					bytesum += byteread; // ×Ö½ÚÊý ÎÄ¼þ´óÐ¡
+					bytesum += byteread; //å­—èŠ‚æ•° æ–‡ä»¶å¤§å°
 					outStream.write(buffer, 0, byteread);
 					byteread = inStream.read(buffer);
 				}
@@ -120,7 +117,7 @@ public class CommonTools {
 				Logger.error("src file " + srcFile + " not exists!");
 			}
 		} catch (Exception e) {
-			Logger.error("¸´ÖÆµ¥¸öÎÄ¼þ²Ù×÷³ö´í", e);
+			Logger.error("å¤åˆ¶å•ä¸ªæ–‡ä»¶æ“ä½œå‡ºé”™", e);
 		} finally {
 			CommonTools.closeIgnoringException(inStream);
 			CommonTools.closeIgnoringException(outStream);
@@ -129,10 +126,7 @@ public class CommonTools {
 	}
 
 	/**
-	 * ·µ»Øµ±ÌìµÄ×Ö·û´®±íÊ¾
-	 * 
-	 * Author: chenggang.du
-	 * $Date: 2014-12-22 09:19:51 +0800 (Mon, 22 Dec 2014) $
+	 * è¿”å›žå½“å¤©çš„å­—ç¬¦ä¸²è¡¨ç¤º
 	 */
 	public static String getDateStr(Date date) {
         if (date == null) {
@@ -143,9 +137,7 @@ public class CommonTools {
 	}
 
 	/**  
-	 * ·µ»ØÄêÔÂÈÕ·Ö¸îµÄÎÄ¼þŠAÂ·½
-	 *
-	 * @return 
+	 *è¿”å›žå¹´æœˆæ—¥åˆ†å‰²çš„æ–‡ä»¶å¤¾è·¯å¾‘
 	 */
 	public static String getFilePathStrFromDate(Date date) {     
         if (date == null) {
@@ -159,10 +151,7 @@ public class CommonTools {
 	}
 	
 	/**
-	 * ¹«ÓÃµÄ¹Ø±ÕÁ÷µÄ´úÂë
-	 * 
-	 * Author: chenggang.du
-	 * $Date: 2014-12-22 09:19:51 +0800 (Mon, 22 Dec 2014) $
+	 * å…¬ç”¨çš„å…³é—­æµçš„ä»£ç 
 	 */
 	public static void closeIgnoringException(Closeable stream) {
 		if (stream != null) {
@@ -175,10 +164,7 @@ public class CommonTools {
 	}
 	
     /**  
-     * »ñÈ¡ÇëÇóµÄÀ´Ô´ip
-     *
-     * @param request
-     * @return 
+     *èŽ·å–è¯·æ±‚çš„æ¥æºip
      */
     public static String getRequestSrcIp(HttpServletRequest request) {
         
@@ -202,8 +188,7 @@ public class CommonTools {
     }
     
     /**  
-     * ¸ù¾Ý¸ø¶¨µÄipÁÐ±íÑéÖ¤¸ø¶¨ipÊÇ·ñºÏ·¨
-     *
+     *æ ¹æ®ç»™å®šçš„ipåˆ—è¡¨éªŒè¯ç»™å®šipæ˜¯å¦åˆæ³•
      * @param srcIp
      * @param valideIps
      * @return 
@@ -231,8 +216,7 @@ public class CommonTools {
     }  
       
     /**  
-     * Ê®Áù½øÖÆ×Ö·û´®×ª»»³Ébytes 
-     *
+     *åå…­è¿›åˆ¶å­—ç¬¦ä¸²è½¬æ¢æˆbytes 
      * @param hexStr
      * @return 
      */
@@ -249,7 +233,7 @@ public class CommonTools {
     }      
 
     /**  
-     * bytes×ª»»³ÉÊ®Áù½øÖÆ×Ö·û´® 
+     * bytesè½¬æ¢æˆåå…­è¿›åˆ¶å­—ç¬¦ä¸² 
      *
      * @param b
      * @return 
@@ -270,8 +254,7 @@ public class CommonTools {
 
 
     /**
-     * »ñÈ¡ÓÊ¼þ·þÎñÆ÷µÄ·ÃÎÊµØÖ·
-     * 
+     * èŽ·å–é‚®ä»¶æœåŠ¡å™¨çš„è®¿é—®åœ°å€
      * @param email
      * @return
      */
@@ -309,25 +292,5 @@ public class CommonTools {
         }
     }
 
-    /**  
-     * ½«appId½ØÈ¡Ç°8Î»£¬²¹Áã£¬»ñÈ¡ºó8Î»×Ö·û´®
-     * Èç appId: 11112 ·µ»Ø 00011112
-     * 
-     * @param appId
-     * @return 
-     */
-    public static String getIdStr(String appId) {
-        if (appId == null || appId.isEmpty()) {
-            Logger.error("call getIdStr with null");
-            return "";
-        }
-        if (appId.length() >= 8) {
-            return appId;
-        }
-        
-        final String idStr = "00000000"+appId;
-        return idStr.substring(idStr.length()-8);
-    }
-    
    
 }

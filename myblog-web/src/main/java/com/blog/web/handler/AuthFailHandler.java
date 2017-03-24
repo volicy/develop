@@ -14,7 +14,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 /**
- * 实现登录中的异常处理
+ * 瀹炵幇鐧诲綍涓殑寮傚父澶勭悊
  */
 public class AuthFailHandler implements AuthenticationFailureHandler {
 	private static final Logger LOGGER = Logger.getLogger(AuthFailHandler.class);

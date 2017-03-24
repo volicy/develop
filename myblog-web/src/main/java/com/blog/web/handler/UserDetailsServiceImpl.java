@@ -33,7 +33,7 @@ import org.zywx.appdo.mdm.entity.application.MdmAplctiongrp;*/
 
 
 /**
- * ´ËÀàÃèÊöµÄÊÇ£ºÓÃ»§µÇÂ¼spring-securityµÄ½Ó¿Ú $Author: chenggang.du $ $Revision: 6201 $
+ * æ­¤ç±»æè¿°çš„æ˜¯ï¼šç”¨æˆ·ç™»å½•spring-securityçš„æ¥å£
  */
 
 public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsService {
@@ -55,8 +55,8 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
     @Autowired
     private AppService appService;*/
     /**
-	 * ¸ù¾İcas·µ»ØµÄnickname²éÕÒÏàÓ¦µÄuser
-	 * Í¬Ê±ĞèÒª¼ÇÂ¼emailµØÖ·
+	 * æ ¹æ®casè¿”å›çš„nicknameæŸ¥æ‰¾ç›¸åº”çš„user
+	 * åŒæ—¶éœ€è¦è®°å½•emailåœ°å€
 	 * 
 	 */
 	@Override
@@ -103,7 +103,7 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
 	}
 
     /**  
-     * ·µ»ØÊÚÈ¨ÁĞ±í
+     * è¿”å›æˆæƒåˆ—è¡¨
      *
      * @param user
      * @return 
@@ -150,9 +150,9 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
     		
         }
         List<String> list=new ArrayList<String>();
-		list.add("Ä¬ÈÏ×é");
-		list.add("°×Ãûµ¥×é");
-		list.add("ºÚÃûµ¥×é");
+		list.add("Ä¬ï¿½ï¿½ï¿½ï¿½");
+		list.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		list.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		for(String s:list){
 			MdmAplctiongrp mdm=appService.findByLoginNameAndName(user.getLoginName(),s);
 			if(mdm==null){
@@ -170,7 +170,7 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
     }*/
     
     /**
-     * oracleÖĞµÄclob×Ö¶ÎÀàĞÍĞèÒª×ª»¯
+     * oracleä¸­çš„clobå­—æ®µç±»å‹éœ€è¦è½¬åŒ–
      * @param clob
      * @return
      */
