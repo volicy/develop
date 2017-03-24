@@ -22,7 +22,7 @@ public class CommonTools {
 
 	private static Log Logger = LogFactory.getLog(CommonTools.class);
 
-	private static byte[] lock = new byte[0]; // 特别的instance变量
+	private static byte[] lock = new byte[0]; 
 
 	private static int generateCount = 0;
 
@@ -40,9 +40,7 @@ public class CommonTools {
 	}  
 	  
 	/**  
-	 * 获取一个唯一的数字id, 根据当前时间的毫秒数+2位随机数获取
-	 *
-	 * @return 
+	 * 获取一个唯一的数字id 根据当前时间的毫秒数+2位随机数获取
 	 */
 	public static String getUniqueString() {
 		synchronized (lock) {
@@ -56,10 +54,6 @@ public class CommonTools {
 			return uniqueNumber;
 		}
 	}
-
-	/**
-	 * 获取uuid
-	 */
 	public static String getUuidString() {
 		return UUID.randomUUID().toString();
 	}
@@ -101,13 +95,13 @@ public class CommonTools {
 					Logger.error("mkdir failed:" + targetPath);
 				}
 			}
-			if (oldfile.exists()) { //// 文件存在时
-				inStream = new FileInputStream(srcFile); //读入原文件
+			if (oldfile.exists()) {
+				inStream = new FileInputStream(srcFile); 
 				outStream = new FileOutputStream(targetPath + targetFileName);
 				final byte[] buffer = new byte[1444];
 				byteread = inStream.read(buffer);
 				while (byteread != -1) {
-					bytesum += byteread; //字节数 文件大小
+					bytesum += byteread; 
 					outStream.write(buffer, 0, byteread);
 					byteread = inStream.read(buffer);
 				}
@@ -117,7 +111,7 @@ public class CommonTools {
 				Logger.error("src file " + srcFile + " not exists!");
 			}
 		} catch (Exception e) {
-			Logger.error("复制单个文件操作出错", e);
+			Logger.error(" error", e);
 		} finally {
 			CommonTools.closeIgnoringException(inStream);
 			CommonTools.closeIgnoringException(outStream);
@@ -126,7 +120,7 @@ public class CommonTools {
 	}
 
 	/**
-	 * 返回当天的字符串表示
+	 * 返回当天的的字符串表示
 	 */
 	public static String getDateStr(Date date) {
         if (date == null) {
@@ -137,7 +131,7 @@ public class CommonTools {
 	}
 
 	/**  
-	 *返回年月日分割的文件夾路徑
+	 * 返回年月日分割的文件路径
 	 */
 	public static String getFilePathStrFromDate(Date date) {     
         if (date == null) {
@@ -188,7 +182,7 @@ public class CommonTools {
     }
     
     /**  
-     *根据给定的ip列表验证给定ip是否合法
+     *根据给定的ip 列表验证给定的ip 是否合法
      * @param srcIp
      * @param valideIps
      * @return 
@@ -216,7 +210,7 @@ public class CommonTools {
     }  
       
     /**  
-     *十六进制字符串转换成bytes 
+     *十六进制字符集转换成 byte
      * @param hexStr
      * @return 
      */
@@ -233,7 +227,7 @@ public class CommonTools {
     }      
 
     /**  
-     * bytes转换成十六进制字符串 
+     * bytes 转换成十六进制字符串
      *
      * @param b
      * @return 
