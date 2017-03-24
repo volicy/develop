@@ -18,7 +18,7 @@ dependencies {
 	providedCompile("org.springframework:spring-context-support:${springVersion}")
 	providedCompile("org.springframework:spring-webmvc:${springVersion}")
 	providedCompile("org.springframework:spring-web:${springVersion}")
-	providedCompile("org.springframework:spring-core:${springVersion}")
+	//providedCompile("org.springframework:spring-core:${springVersion}")
 	providedCompile("org.springframework:spring-oxm:${springVersion}")
 	providedCompile('org.springframework.data:spring-data-jpa:1.8.0.RELEASE')
 	providedCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
@@ -29,7 +29,7 @@ dependencies {
 	//dubbo
 	compile('org.apache.zookeeper:zookeeper:3.4.6')
     compile('com.alibaba:dubbo:2.5.3'){
-    	exclude group:'org.springframework'
+    	exclude group:'spring-core'
     }
     compile('com.github.sgroschupf:zkclient:0.1')
     
