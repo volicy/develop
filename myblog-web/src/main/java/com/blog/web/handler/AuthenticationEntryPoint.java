@@ -30,6 +30,7 @@ public class AuthenticationEntryPoint extends CasAuthenticationEntryPoint {
 	}
 	
 	protected String createRedirectUrl(final String serviceUrl) {
+
 		String redirectUrl = super.createRedirectUrl(serviceUrl);
 		if(this.noLoginPage!=null){
 			return redirectUrl + this.noLoginPage;
