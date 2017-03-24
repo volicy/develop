@@ -25,8 +25,8 @@ public class UserAccessDeniedHandler implements AccessDeniedHandler {
 
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         response.sendRedirect(accessDeniedUrl);
-        //String deniedMessage = accessDeniedException.getMessage();
-        //String rp = request.getRequestURI();
+        String deniedMessage = accessDeniedException.getMessage();
+        String rp = request.getRequestURI();
         //request.getSession().setAttribute(Constants.ACCESS_DENIED_MSG, deniedMessage);
     }
 
