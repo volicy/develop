@@ -69,3 +69,7 @@ task 开发测试(type: War){
 	archiveName 'ROOT.war'
 	rootSpec.exclude('spring/applicationContext-content.xml')
 }
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+war.archiveName('ROOT.war')
+war.rootSpec.exclude('spring/applicationContext-content.xml')
