@@ -83,7 +83,7 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
         user.setLastLoginAt(currentTime);
         userService.save(user);*/
         
-        /*Set<GrantedAuthority> grantedAuths = obtainGrantedAuthorities(user);*/
+        Set<GrantedAuthority> grantedAuths = obtainGrantedAuthorities();
 
         boolean enabled = true;
         boolean accountNonExpired = true;
@@ -92,14 +92,13 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
         
       
         
-        /*UserDetails userdetails = new org.springframework.security.core.userdetails.User(
-                user.getLoginName(), "", enabled, accountNonExpired,
-                credentialsNonExpired, accountNonLocked, grantedAuths);*/
+        UserDetails userdetails = new org.springframework.security.core.userdetails.User(
+        		userName, "", enabled, accountNonExpired,
+                credentialsNonExpired, accountNonLocked, grantedAuths);
         
 
 
-       // return userdetails; 
-        return null;
+        return userdetails; 
 	}
 
     /**  
@@ -108,12 +107,13 @@ public class UserDetailsServiceImpl extends AbstractCasAssertionUserDetailsServi
      * @param user
      * @return 
      */
-    /*private Set<GrantedAuthority> obtainGrantedAuthorities(
-    		AdminUserInfo user) {
+    private Set<GrantedAuthority> obtainGrantedAuthorities() {
         Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
         
         authSet.add(new SimpleGrantedAuthority("ROLE_USER"));
-        if(user.getLoginName().equals("admin")){
+        return authSet;
+    }
+       /* if(user.getLoginName().equals("admin")){
         	List<NodulePrivilege> nos=adminUserGroupPrivilegeService.findByAllNodulePrivilege();
         	if(nos!=null && nos.size() != 0){
 				for(NodulePrivilege n : nos){

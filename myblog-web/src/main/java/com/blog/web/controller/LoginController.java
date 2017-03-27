@@ -10,9 +10,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
 	
-	@RequestMapping(value="/index")
-	public String test(HttpServletResponse response,HttpServletRequest reqeust){
-		
-		return "login";
-	}
+
 }

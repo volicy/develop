@@ -19,8 +19,14 @@ public class TestController {
 	
 	@RequestMapping(value="/test1")
 	@ResponseBody
-	public String test(HttpServletResponse response,HttpServletRequest reqeust){
+	public String test1(HttpServletResponse response,HttpServletRequest reqeust){
 		userService.insertUser(null);
+		return "test";
+	}
+	
+	@RequestMapping(value="/test")
+	public String test(HttpServletResponse response,HttpServletRequest reqeust){
+		
 		return "test";
 	}
 }
