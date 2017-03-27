@@ -24,9 +24,16 @@ public class TestController {
 		return "test";
 	}
 	
+	
 	@RequestMapping(value="/test")
 	public String test(HttpServletResponse response,HttpServletRequest reqeust){
 		
 		return "test";
+	}
+	
+	@RequestMapping(value="/test2")
+	public String test2(HttpServletResponse response,HttpServletRequest reqeust){
+		
+		return "test2";
 	}
 }
