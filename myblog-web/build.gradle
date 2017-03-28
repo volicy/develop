@@ -68,13 +68,12 @@ task makeJar(type:org.gradle.api.tasks.bundling.Jar) {
     //去掉R$开头的文件 
     exclude{ it.name.endsWith('impl$');} 
 }
-
-test {
-    systemProperties 'property': 'value'
+task copyTestingConfig_xu(type: Copy) {
+    from '/config-test-xu'
+    into '/build/resources/main'
 }
-
-task copyTestingConfig(type: Copy) {
-    from '/config-test'
+task copyTestingConfig_f(type: Copy) {
+    from '/config-test-f'
     into '/build/resources/main'
 }
 task copyServerConfig(type: Copy) {
@@ -85,12 +84,17 @@ task copyServerConfig(type: Copy) {
 task 生产环境(type: War){
 	dependsOn copyServerConfig
 	archiveName 'ROOT.war'
-	rootSpec.exclude('spring/applicationContext-prod.xml')
+	rootSpec.exclude('spring/applicationContext-content.xml')
 }
-task 开发测试(type: War){
-	dependsOn copyTestingConfig
+task 徐本地测试环境(type: War){
+	dependsOn copyTestingConfig_xu
 	archiveName 'ROOT.war'
-	rootSpec.exclude('spring/applicationContext-prod.xml')
+	rootSpec.exclude('spring/applicationContext-content.xml')
+}
+task F本地测试环境(type: War){
+	dependsOn copyTestingConfig_f
+	archiveName 'ROOT.war'
+	rootSpec.exclude('spring/applicationContext-content.xml')
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
