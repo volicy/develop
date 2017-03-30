@@ -112,6 +112,7 @@
                 </div>
             </div>
         </div>
+        <jsp:directive.include file="includes/bottom.jsp" />
         <div class="footer"></div>
         <!-- <script src="./js/bootstrapValidator.js"></script> -->
         <!-- <script data-main="/js/login-config.js" src="/js/require.js"></script> -->
