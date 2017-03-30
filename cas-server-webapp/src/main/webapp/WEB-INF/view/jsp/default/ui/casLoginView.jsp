@@ -63,11 +63,12 @@
                                 <div class="user-pass">
                                     <form id="fm1"  commandName="${commandName}"  method="post">
                                         <input id="username" name="username" tabindex="1" placeholder="输入用户名/邮箱" class="user-name" type="text" value=""/>
-                                        <input id="password" name="password" tabindex="2" placeholder="输入密码" class="pass-word" type="password" value="" autocomplete="off"/>
-                                        <div class="error-mess" style="display:none;">
+                                        <input id="password" name="password" tabindex="2" placeholder="输入密码" class="pass-word" type="password" value="" accesskey="${passwordAccessKey}" autocomplete="off"/> 
+                                        <div class="error-mess" style="display:none1;">
                                             <span class="error-icon"></span>
-                                            <span id="error-message"></span>
+                                            <span id="error-message"><spring:message code="screen.welcome.instructions" /></span>
                                             <form:errors path="*" id="msg" cssClass="errors" element="div" htmlEscape="false" />
+                                        	
                                         </div>
                                         <div class="row forget-password">
                                             <span class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
