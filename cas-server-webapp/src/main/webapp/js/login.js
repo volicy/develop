@@ -17,6 +17,14 @@ define( ['jquery'],function () {
       var et = evt || window.event;
       inputFocus( et );
     } );
+    
+    $(".pass-word").blur(function(){
+    	var username=$("#username").val();
+    	var password=$("#password").val();
+    	if(username && password){
+    		$mess.hide();
+    	}
+    });
 
     $login.bind( 'click', function () {
       if ( $user.val() == '' )
