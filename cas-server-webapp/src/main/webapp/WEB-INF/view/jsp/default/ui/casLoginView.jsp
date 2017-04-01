@@ -16,6 +16,7 @@
         <title>帐号登录 账号登录</title>
         <link type="text/css" rel="stylesheet" href="./css/bootstrap.css" />
         <link type="text/css" rel="stylesheet" href="./css/login.css" />
+        <link type="text/css" rel="stylesheet" href="./css/drag.css" />
         <link type="text/css" rel="stylesheet" href="./css/weixinqr.css" />
         <!-- <script src="./js/ga.js"></script> -->
          <!-- <script src="./js/jquery.js"></script> --> 
@@ -28,10 +29,11 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
         <script type="text/javascript">
-            requirejs(["jquery","login"], function(jquery,login) {
-            
+            requirejs(["jquery","login","drag"], function(jquery,login,drag) {
                login.init();
+               drag.drag();
             });
+            
         </script>
     </head>
     <body>
@@ -64,6 +66,8 @@
                                     <form id="fm1"  commandName="${commandName}"  method="post">
                                         <input id="username" name="username" tabindex="1" placeholder="输入用户名/邮箱" class="user-name" type="text" value=""/>
                                         <input id="password" name="password" tabindex="2" placeholder="输入密码" class="pass-word" type="password" value="" accesskey="${passwordAccessKey}" autocomplete="off"/> 
+                                        <br>
+                                        <div id="drag" ></div>
                                         <div class="error-mess" style="display:none1;">
                                             <span class="error-icon"></span>
                                             <span id="error-message"><spring:message code="screen.welcome.instructions" /></span>
