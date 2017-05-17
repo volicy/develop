@@ -34,7 +34,8 @@
 }
 .extends-input,
 .user-name,
-.pass-word {
+.pass-word,
+.drag {
   background: #fff;
   display: block;
   width: 100%;

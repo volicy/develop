@@ -40,6 +40,9 @@ define( ['jquery'],function () {
       else
       {
         $mess.hide();
+        if(!sgr){
+        	alert('请输入密码！');
+        }
         $form.submit();
       }
     } );
