@@ -60,6 +60,7 @@ dependencies {
     compile('com.github.pagehelper:pagehelper:4.0.3')
     
     
+    compile('com.google.protobuf:protobuf-java:3.3.0')
 	
     compile fileTree(dir:'/src/main/lib/',include:['*.jar'])
 }
