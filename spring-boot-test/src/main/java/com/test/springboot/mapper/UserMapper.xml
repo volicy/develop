@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.springboot.mapper.UsersMapper">
+
+
+  <resultMap id="BaseResultMap" type="com.test.springboot.entity.Users">
+    <id column="id"  property="id" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="companyName" jdbcType="VARCHAR" property="companyName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="createTime"  property="createTime" />
+    <result column="userStatus" jdbcType="INTEGER" property="userStatus" />
+    <result column="createTimeStr" jdbcType="VARCHAR" property="createTimeStr" />
+  </resultMap>
+  
+  
+  <select id="getUsers" parameterType="com.test.springboot.entity.Users" resultMap="BaseResultMap" >
+  	select * from  t_users 
+  	where 1=1 
+  		and loginName=#{loginName}
+  		and password=#{password}
+  </select>
+	
+	
+	 <select id="getUsers2" parameterType="java.util.Map" resultType="com.test.springboot.entity.Users" >
+  	select * from  t_users 
+  	where 1=1 
+  		and loginName=#{username}
+  		and password=#{password}
+  </select>
+	
+<select id="findAll" resultType="com.test.springboot.entity.Users">
+	select * from t_users
+</select>
+	
+	<insert id="insertA" parameterType="com.test.springboot.entity.Users">
+		<selectKey keyProperty="id" resultType="long" order="AFTER" >
+               SELECT LAST_INSERT_ID() as id
+        </selectKey>
+		insert into t_users(
+			id,
+			loginName,
+			password,
+			companyName,
+			email,
+			mobile,
+			createTime,
+			userStatus
+			)values(
+			#{id},
+			#{loginName},
+			#{password},
+			#{companyName},
+			#{email},
+			#{mobile},
+			#{createTime},
+			#{userStatus}
+			);
+	</insert>
+	
+	<update id="updateA" parameterType="com.test.springboot.entity.Users">
+		update t_users set 
+			loginName=#{loginName},
+			password=#{password},
+			companyName=#{companyName},
+			email=#{email},
+			mobile=#{mobile},
+			createTime=#{createTime},
+			userStatus=#{userStatus}
+			where id=#{id}
+	</update>
+	
+	<select id="findById" resultType="com.test.springboot.entity.Users">
+		select * from t_users where id=#{id}
+	</select>
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
