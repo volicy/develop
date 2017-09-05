@@ -1,0 +1,85 @@
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+//设置远程仓库 地址
+repositories {
+    //jcenter()
+    //mavenCentral()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
+}
+ext {
+    springVersion ="4.1.4.RELEASE"
+    servletApiVersion ="3.1.0"
+}
+dependencies {
+	compile project(':myblog-core')
+	//spring
+	providedCompile("org.springframework:spring-context:${springVersion}")
+	providedCompile("org.springframework:spring-context-support:${springVersion}")
+	providedCompile("org.springframework:spring-webmvc:${springVersion}")
+	providedCompile("org.springframework:spring-web:${springVersion}")
+	//providedCompile("org.springframework:spring-core:${springVersion}")
+	providedCompile("org.springframework:spring-oxm:${springVersion}")
+	providedCompile('org.springframework.data:spring-data-jpa:1.8.0.RELEASE')
+	providedCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
+	
+	//数据库连接池
+	compile('com.zaxxer:HikariCP:2.6.1')
+	
+	//dubbo
+	compile('org.apache.zookeeper:zookeeper:3.4.6')
+    compile('com.alibaba:dubbo:2.5.3'){
+    	exclude group:'org.springframework'
+    }
+    compile('com.github.sgroschupf:zkclient:0.1')
+    
+    compile('org.mybatis:mybatis:3.3.0')
+    compile('org.mybatis:mybatis-spring:1.3.0')
+    compile group: 'com.github.miemiedev', name: 'mybatis-paginator', version: '1.2.5'
+    compile('com.github.pagehelper:pagehelper:4.0.3')
+    compile('com.fasterxml.jackson.core:jackson-core:2.5.0')
+	compile('com.fasterxml.jackson.core:jackson-databind:2.5.0')
+	compile('org.codehaus.castor:castor:1.2')
+	compile('xerces:xercesImpl:2.11.0')
+	compile('commons-fileupload:commons-fileupload:1.3.1')
+	
+    //compile fileTree(dir:'/src/main/lib/',include:['*.jar'])
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+task copyTestingConfig_xu(type: Copy) {
+    from '/config-test-xu'
+    into '/build/resources/main'
+}
+task copyTestingConfig_f(type: Copy) {
+    from '/config-test-f'
+    into '/build/resources/main'
+}
+task copyServerConfig(type: Copy) {
+    from '/config-server'
+    into '/build/resources/main'
+}
+
+task 生产环境(type: War){
+	dependsOn copyServerConfig
+	archiveName 'ROOT.war'
+	rootSpec.exclude('spring/applicationContext-content.xml')
+}
+task 徐本地测试环境(type: War){
+	dependsOn copyTestingConfig_xu
+	archiveName 'ROOT.war'
+	rootSpec.exclude('spring/applicationContext-content.xml')
+}
+task F本地测试环境(type: War){
+	dependsOn copyTestingConfig_f
+	archiveName 'ROOT.war'
+	rootSpec.exclude('spring/applicationContext-content.xml')
+}
+
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+war.archiveName('ROOT.war')
+war.rootSpec.exclude('spring/applicationContext-content.xml')

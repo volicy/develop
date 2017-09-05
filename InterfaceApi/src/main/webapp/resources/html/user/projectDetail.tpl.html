@@ -1,0 +1,137 @@
+<div id="editer-project" class="none">
+		<div class="r0 p10 pt0 col-xs-12" ng-controller="detailCtrl">
+			<form ng-submit="submitForm('user/project/addOrUpdate.do')">
+				<table class="table table-bordered">
+					</tr>
+					<tr>
+						<td class="tc w100">名称</td>
+						<td class="tc" colspan="3">
+							<input  class="form-control"  type="text" ng-model="model.name" required placeholder="项目名">
+						</td>
+					</tr>
+					<tr>
+						<td class="tc">是否公开</td>
+						<td class="tl" colspan="3">
+							*私有项目不会建立索引，站内全文搜索检索不到，私有项目必须登录后才能访问（项目创建者、项目成员可见）、公开项目可以通过项目主页访问。已经建立的索引将不会删除，需触发修改才能删除
+							<br>
+							<input  class="form-control"  id="typeName" type="text" ng-model="model.typeName" required placeholder="点击选择"
+						ng-focus="loadPickByName('iwidth=180|iheight=200|tagName=typeName|tag=type|code=PROJECTTYPE|def='+model.type,$event)">
+						</td>
+					</tr>
+					<tr>
+						<td class="tc">项目简介</td>
+						<td class="tc" colspan="3">
+							<textarea rows="5" class="form-control no-resize" ng-model="model.remark"></textarea>
+					</tr>
+					<tr ng-if="isAdmin()">
+						<td class="tc">项目类型</td>
+						<td class="tl" colspan="3">
+							*推荐项目将在首页默认显示<br>
+							<input  class="form-control"  id="statusName" type="text" ng-model="model.statusName" required placeholder="点击选择"
+						ng-focus="loadPickByName('iwidth=180|iheight=200|tagName=statusName|tag=status|code=PROJECTSTATUE|def='+model.status,$event)">
+						</td>
+					</tr>
+					
+					<tr ng-if="model.type==2"><!-- 只有公开的项目才能添加密码 -->
+						<td class="tc">访问密码</td>
+						<td class="tl" colspan="3">
+						*公开项目可以添加项目密码，浏览时必须输入密码后浏览时需要输入密码才能查看。系统会缓存输入的密码，输入密码后短时间内不需要再次输入<br>
+						<input class="form-control"
+							type="text" ng-model="model.password" placeholder="可选，私密项目请设置密码"></td>
+					</tr>
+					<tr>
+						<td class="tc">排序</td>
+						<td class="tc" colspan="3">
+						<input class="form-control" min="0" max="10000" required type="number" ng-model="model.sequence"></td>
+					</tr>
+					<tr>
+						<td class="tc">封面</td>
+						<td class="tc" colspan="3">
+							<input class="form-control" type="text" ng-model="model.cover" id="imgUrl" placeholder="封面可输入地址亦可在下方上传">
+						</td>
+					</tr>
+				</table>
+				<button class="ndis" id="projectForm" type="submit">提交</button>
+			</form>
+			<form enctype="multipart/form-data" name="imageForm" style="margin-top:-21px"
+				target="hiddenFrame"
+				action="file/upload.do?callBack=uploadImgCallBack&property=cover" method="post">
+				<table class="table table-bordered">
+					<tr>
+						<td class="tc w100">上传封面</td>
+						<td>
+							<div class="col-xs-6 p0">
+								<div class="C999 file fl mr20 cursor" title="点击选择图片" onclick="$('#uploadImg').click();">
+									<i class="iconfont f60 main-color">&#xe619;</i>
+								</div>
+								<span class="ndis"> 
+									<input type="file" name="img" onchange="uploadImage('uploadImg',2048,imageForm,'cover')" id="uploadImg" />
+								</span>
+							</div>
+							<div class="col-xs-6 p0 maw400 mah400">
+								<img src="{{model.cover}}" class="main-bg" id="image"
+									ng-show="model.cover!=''">
+							</div>
+	
+						</td>
+					</tr>
+				</table>
+			</form>
+	</div>
+	<button class="btn btn-success fr" onclick="$('#projectForm').click();">提交</button>
+	<div class="cb"></div>
+	<iframe name="hiddenFrame" class="ndis"></iframe>
+	
+</div>
+<div id="staticize-project" class="none">
+	<form id="staticize-form">
+				<table class="table table-bordered">
+					</tr>
+					<tr>
+						<td class="tc w100">名称</td>
+						<td class="tc" colspan="3">
+							<input  class="form-control"  type="text" ng-model="model.name" readonly placeholder="项目名">
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="tc">提示</td>
+						<td class="tl" colspan="3">
+							什么叫静态化？<br>
+								&nbsp;&nbsp;静态化是指将网页静态化成html页面，当通过静态化后的地址访问项目不在需要查询数据库，使用静态化能显著加快项目访问速度！<br>
+							下载静态化文件？<br><br>
+								&nbsp;&nbsp;点击【静态化】后方可通过【下载静态化文件】按钮下载对应的html页面，接压缩或，项目接口等能够直接通过浏览器部署，
+								也可部署至html服务器器下（不需要java环境，任何web环境都可）<br><br>
+							
+							*私有化项目不支持静态化<br>
+							*系统不会自动静态化，修改后需要手动静态化<br>
+							*静态化后可以通过模块列表中的静态化地址访问静态化后的页面<br>
+							*文章为必选项，可用来添加项目说明、联系方式等<br>
+							*为了保证系统安全，在不需要静态化后，请及时删除静态化文件<br>
+							<br>
+							<div id="downloadUrl" class="text-danger fb"></div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							静态化类型
+						</td>
+						<td>
+							<input type="checkbox" name="needStaticizes" value="error">&nbsp;&nbsp;错误码&nbsp;&nbsp;
+							<input type="checkbox" name="needStaticizes" value="interface">&nbsp;&nbsp;接口&nbsp;&nbsp;
+							<input type="checkbox" name="needStaticizes" value="dictionary">&nbsp;&nbsp;数据字典&nbsp;&nbsp;
+						</td>
+					</tr>
+				</table>
+				<button class="btn btn-success fr ml10"  type="button" ng-click="staticize(model.id)">
+					<i class="iconfont">&#xe640;</i>静态化</button>
+				<button class="btn btn-danger fr ml10"  type="button" 
+					ng-click="callAjaxByName('iUrl=user/staticize/delStaticize.do?projectId='+model.id+'|iLoading=TIPFLOAT静态化中，请稍后...')">
+					<i class="iconfont">&#xe60c;</i>删除静态化</button>
+				<button class="btn btn-primary fr"  type="button" 
+					ng-click="downloadStaticize(model.id)">
+					<i class="iconfont">&#xe624;</i>下载文件</button>
+			</form>
+</div>
+
+

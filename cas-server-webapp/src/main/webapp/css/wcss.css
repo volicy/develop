@@ -1,0 +1,96 @@
+body{
+	 padding-top: 40px;
+    padding-bottom: 40px;
+	background:#564D3D;
+}
+.username{
+	position: relative;
+	top: 37px;
+	float:left;
+	margin:50px 80px;
+	width: 241px;
+	height: 36px;
+}
+.password{
+	float:left;
+	position: relative;
+	top: 40px;
+	margin:-37px 80px 50px;
+	width: 241px;
+	height: 36px;
+  
+}
+input{
+	width: 264px;
+	height: 32px;
+	line-height: 24px;
+}
+input:focus {
+	outline:none;
+}
+.div_login{
+	margin:50px auto;
+	border-radius: 20px;
+	width:400px;
+	height:241px;
+	border:0;
+	background-image:url(../images/muban3.jpg)
+}
+.button{
+	margin:50px auto;
+	position: relative;
+	top: -100px;
+	z-index: -1;
+	border-radius: 20px;
+	width: 400px;
+	height: 118px;
+	border: 0;
+	background-image: url(../images/login_button.png);
+}
+/*
+.login_button{
+  width: 115px;
+  height: 38px;
+  border: 0;
+  background: #794A2C;
+  border-radius: 30px;
+  text-align: center;
+  font: bold 1.5em 'Trebuchet MS',Arial, Helvetica;
+  color: #fff;
+  text-decoration: none;
+}
+*/
+.form-signin{
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.login_button{
+  position: relative;
+  left: 122px;
+  top: -205px;
+  width: 149px;
+  border:0px;
+  background: #794A2C;
+}
+a{
+	text-decoration: none;
+}
+.login_button:hover        {                               
+	background: -webkit-gradient(linear, left top, left bottom, from(#B17E51), to(#794A2C) );            
+	background: -moz-linear-gradient(-90deg, #B17E51, #794A2C);                   
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+	color: #666; 
+	font: bold 1.5em 'Trebuchet MS',Arial, Helvetica;
+} 
+input:-moz-placeholder, textarea:-moz-placeholder { 
+	color: #666;
+	font: bold 1.5em 'Trebuchet MS',Arial, Helvetica;
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+	color: #666; 
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+	color: #666;
+}

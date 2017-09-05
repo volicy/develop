@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+  <bean id="urlBean" class="com.blog.web.util.URLBean">
+    <property name="visitLimit" value="10" /> 
+    <property name="unRestrictIp" value="192.169" /> 
+    <property name="countFilterURL">
+      <list>
+        <value>/app/index</value>
+        <value>/app/managerIndex</value>
+        <value>/app/getApps</value>
+        <value>/app/appGroupIndex</value>
+      </list>
+    </property>
+  </bean>
+</beans>

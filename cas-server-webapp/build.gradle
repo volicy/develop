@@ -1,0 +1,77 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+group = 'org.jasig.cas'
+version = '4.1.10'
+
+description = "Apereo CAS Web Application"
+
+ext {
+    springVersion ="4.1.10"
+    servletApiVersion ="3.1.0"
+}
+//nexus 仓库 地址配置
+repositories {
+    // maven { url "http://repo.maven.apache.org/maven2" }
+    //mavenCentral()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
+}
+dependencies {
+    compile group: 'org.springframework', name: 'spring-expression', version:'4.1.8.RELEASE'
+    
+    compile group: 'com.ryantenney.metrics', name: 'metrics-spring', version:'3.1.0'
+    compile group: 'io.dropwizard.metrics', name: 'metrics-jvm', version:'3.1.2'
+    
+    compile("org.jasig.cas:cas-server-core:${springVersion}")
+    compile("org.jasig.cas:cas-server-webapp-support:${springVersion}")
+    compile("org.jasig.cas:cas-server-core-api:${springVersion}")
+    compile("org.jasig.cas:cas-server-support-generic:${springVersion}")
+    compile("org.jasig.cas:cas-server-support-jdbc:${springVersion}")
+    
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.39'
+    compile group: 'io.dropwizard.metrics', name: 'metrics-servlets', version:'3.1.2'
+    
+    runtime group: 'javax.servlet', name: 'jstl', version:'1.2'
+    runtime group: 'taglibs', name: 'standard', version:'1.1.2'
+    runtime group: 'org.jasig.cas', name: 'cas-server-security-filter', version:'2.0.4'
+}
+
+
+
+test {
+    systemProperties 'property': 'value'
+}
+
+task copyTestingConfig_xu(type: Copy) {
+    from '/config-test-xu'
+    into '/build/resources/main'
+}
+task copyTestingConfig_f(type: Copy) {
+    from '/config-test-f'
+    into '/build/resources/main'
+}
+task copyServerConfig(type: Copy) {
+    from '/config-server'
+    into '/build/resources/main'
+}
+
+task 生产环境(type: War){
+	dependsOn copyServerConfig
+	archiveName 'ROOT.war'
+	rootSpec.exclude('spring/applicationContext-content.xml')
+}
+task 徐本地测试环境(type: War){
+	dependsOn copyTestingConfig_xu
+	archiveName 'ROOT.war'
+	rootSpec.exclude('spring/applicationContext-content.xml')
+}
+task F本地测试环境(type: War){
+	dependsOn copyTestingConfig_f
+	archiveName 'ROOT.war'
+	rootSpec.exclude('spring/applicationContext-content.xml')
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+war.archiveName('ROOT.war')
+war.rootSpec.exclude('spring/applicationContext-content.xml')

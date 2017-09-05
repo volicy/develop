@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+repositories {
+  maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
+}
+ext {
+  springBootVersion = "1.5.2.RELEASE"
+}
+
+dependencies {
+
+	compile 'org.codehaus.groovy:groovy-all:2.2.1'
+	compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+	compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+	
+	compile('org.apache.commons:commons-lang3:3.3.2')
+	
+    compile 'com.google.guava:guava:20.0'
+    testCompile 'junit:junit:4.12'
+}
+
