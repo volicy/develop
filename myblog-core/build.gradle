@@ -1,0 +1,21 @@
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+//设置远程仓库 地址
+repositories {
+    //jcenter()
+    //mavenCentral()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
+}
+
+dependencies {
+
+
+
+    compile fileTree(dir:'/src/main/lib/',include:['*.jar'])
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'

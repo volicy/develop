@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:s="http://www.springframework.org/schema/security" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/security  
+        http://www.springframework.org/schema/security/spring-security.xsd"> 
+
+    <description>SpringSecurity安全配置</description>
+
+    <!-- userDetailsService中要autowired进userDao -->
+    <!-- <context:component-scan base-package="com.myblog" /> -->
+    <context:component-scan base-package="com.blog.*.service">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	
+	
+    <!-- http安全配置  -->
+
+    <s:http entry-point-ref="casEntryPoint" use-expressions="true">
+        <s:intercept-url pattern="/sec/**" access="permitAll" />  
+        <s:intercept-url pattern="/static/**" access="permitAll" />
+        <s:intercept-url pattern="/pkgFile/*" access="hasRole('ROLE_USER')" />
+        <!-- <s:intercept-url pattern="/test/**" access="hasRole('ROLE_USER')" /> -->
+         <s:intercept-url pattern="/test/**" access="hasRole('ROLE_USER')" />
+        <s:access-denied-handler ref="accessDeniedHandler"/>
+        <s:custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
+   		<!-- <s:custom-filter ref="licenseValidFilter" after="CAS_FILTER"/>   -->
+        <s:custom-filter position="CAS_FILTER" ref="casFilter" />
+        <s:logout logout-url="/sec/logout" 
+            success-handler-ref="casLogoutHandler"
+            invalidate-session="true" 
+            /> 
+    </s:http>
+	
+	
+	<bean id="accessDeniedHandler"
+		class="com.blog.web.handler.UserAccessDeniedHandler">
+		<property name="accessDeniedUrl" value="${baseurl}/common/403" />
+	</bean>
+	
+	
+    <!-- This filter handles a Single Logout Request from the CAS Server -->
+    <bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
+	
+	<!-- <bean id="licenseValidFilter" class="org.zywx.appdo.mam.service.util.LienceValidFilter">
+		<property name="redirectUrl" value="${container.siteBaseUrl}/license/index"></property>
+		<property name="certErrorUrl" value="${container.siteBaseUrl}/certError.jsp"></property>
+	</bean>  -->
+	
+    <!-- This filter redirects to the CAS Server to signal Single Logout should be performed -->
+     <bean id="requestSingleLogoutFilter"  
+        class="org.springframework.security.web.authentication.logout.LogoutFilter">  
+        <property name="filterProcessesUrl" value="${baseurl}/sec/j_spring_cas_security_logout" />  
+        <constructor-arg value="${sso_baseurl}/logout" />  
+        <constructor-arg>  
+            <bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />  
+        </constructor-arg>  
+    </bean>
+
+	<bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
+		<property name="service"
+			value="${baseurl}/sec/j_spring_cas_security_check" />
+		<property name="sendRenew" value="false" />
+	</bean>
+
+	<!-- 实现登录中的异常处理 -->
+	<bean id="authFailHandler" class="com.blog.web.handler.AuthFailHandler">
+		<property name="loginUrl"
+			value="${sso_baseurl}/login?service=${htmlBaseUrl}" />
+	</bean>
+	
+	<!-- 自定义的登录成功处理方法，如果不是被拦截的页面，则调整到ajax登录返回 -->
+	<bean id="successHandler" class="com.blog.web.handler.AuthenticationSuccessHandler">
+		<property name="ajaxTargetUrl" value="${htmlBaseUrl}" />
+	</bean>
+  	
+  	<!-- 本地登出成功后，调用此方法从CAS登出 -->
+  	<bean id="casLogoutHandler" class="com.blog.web.handler.CasLogoutHandler">
+        <property name="casLogoutUrl" value="${sso_baseurl}/logout?service=${htmlBaseUrl}"/>
+  	</bean>
+  	
+	<bean id="casFilter"
+			class="org.springframework.security.cas.web.CasAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="authenticationFailureHandler" ref="authFailHandler"/>
+		<property name="authenticationSuccessHandler" ref="successHandler"/>
+        <property name="filterProcessesUrl" value="/sec/j_spring_cas_security_check" />
+	</bean>
+	
+	<bean id="casEntryPoint" 
+			class="com.blog.web.handler.AuthenticationEntryPoint">
+        <property name="loginUrl" value="${sso_baseurl}/login"/>
+		<property name="serviceProperties" ref="serviceProperties"/>
+	</bean>
+	
+	<s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider ref="casAuthenticationProvider"/>
+	</s:authentication-manager>
+	
+	<bean id="casAuthenticationProvider"
+			class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+		<property name="authenticationUserDetailsService" ref="userDetailsService"/>
+		<property name="serviceProperties" ref="serviceProperties" />
+		<property name="ticketValidator">
+			<bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+                <constructor-arg index="0" value="${sso_baseurl}" />
+			</bean>
+		</property>
+		<property name="key" value="myblog"/>
+	</bean>
+	
+	<!-- 项目实现的用户查询服务 -->
+	<bean id="userDetailsService"
+		class="com.blog.web.handler.UserDetailsServiceImpl" />
+	
+</beans>

@@ -1,0 +1,6 @@
+rootProject.name = 'myblog-web'
+
+include(':myblog-core')
+project(':myblog-core').projectDir = new File(settingsDir, '../myblog-core')
+
+
