@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:s="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd ">
+	
+		<s:http use-expressions="false" authentication-manager-ref="authenticationManager">
+			<!-- csrf 默认是开启状态，手动关闭，不然请求都被拦截 true 为关闭，false 开启 -->
+			<s:csrf disabled="true"/>
+		
+			 <s:intercept-url pattern="/account/login" access="ROLE_USER"/>
+			 <s:intercept-url pattern="/account/success" access="ROLE_USER"/>
+			 <!-- <s:intercept-url pattern="/account/loginPage" access="none"/> -->
+			 <s:intercept-url pattern="/access/*" access="ROLE_USER"/> 
+			<!--  
+			login-processing-url 正则匹配，登录form表单提交的地址
+			authentication-failure-forward-url 认证失败时跳转到URL<最后不要用这种方式，因为登陆提交的时候是POST，forward是get>
+			authentication-failure-url：认证失败会重定向到该页面
+			
+			always-use-default-target:如果走默认的SuccessHandler才会有效，设置为true
+			
+			login-page：LoginUrlAuthenticationEntryPoint 跳转到登陆界面
+			若没有配置 entry入口，那么默认是：LoginUrlAuthenticationEntryPoint
+			-->
+			
+			<s:form-login login-page="/account/loginPage"  username-parameter="_user_name" 
+			password-parameter="_user_password" 
+			login-processing-url="/account/login" 
+			always-use-default-target="true" 
+			default-target-url="/account/success"
+			authentication-failure-url="/account/loginPage"/>
+			
+			
+			<!-- authentication-success-forward-url="/success" -->
+			<!-- authentication-failure-forward-url="/account/loginPage" -->
+			
+			<s:access-denied-handler error-page="/account/login"/>
+		</s:http>
+		
+		<s:authentication-manager id="authenticationManager">
+			<s:authentication-provider user-service-ref="userDetailsService"></s:authentication-provider>
+		</s:authentication-manager>
+		
+		
+		<bean class="com.security.test.service.UserServiceImpl" id="userDetailsService"></bean>
+</beans>
